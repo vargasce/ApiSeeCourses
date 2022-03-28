@@ -23,6 +23,7 @@ const conectionDB = ( function () {
 	
 		let _con;
 		try{
+			console.log( data_conf );
 			_con = new Client(data_conf);
 			_con.connect();
 		}catch( error ){
