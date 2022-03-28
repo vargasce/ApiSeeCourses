@@ -43,5 +43,9 @@ router.post('/localidad', Localidad.localidad );                      // CONTROL
 router.post('/list', Parametrizacion.parametrizacion );               // CONTROLLER PARAMETRIZACION
 router.post('/deleteFile', Upload.eliminarArchivo );                  // METHOD DELET
 
+router.get('/life', ( req, res )=>{
+    return res.status(200).send({ 'error': '', 'Response': `Service Life.`});
+});
+
 module.exports = router;
 
