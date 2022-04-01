@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const multiparty = require('connect-multiparty');
 const middlewareAccess = require('./Middleware/Access/middleware.access');
+const cors = require('cors');
 
 console.log(`[+] Cargando rutas del sistema`);
 const routes = require('./Routes/routes');
@@ -20,6 +21,8 @@ app.use( require('express-useragent').express() );
 
 /** CONFIGURACION DE CORS **/
 console.log('[+] Config CORS.');
+app.use(cors());
+/*
 app.use( ( req, res, next ) =>{
 	res.header('Access-Control-Allow-Origin', '*'); //En una app real en lugar del * se deberia ingresar el url permitidas
   res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
@@ -27,6 +30,7 @@ app.use( ( req, res, next ) =>{
   res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
+*/
 
 //VALIDO USUARIO
 console.log('[+] Excecute middleware.');
