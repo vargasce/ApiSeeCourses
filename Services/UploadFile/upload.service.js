@@ -61,7 +61,7 @@ const uploadService = {
         if( exits ){
           resolve( path.resolve( image_path ) );
         }else{
-          reject({ 'error' : true });
+          reject( `Imagen no econtrada: ${exits}`);
         }
       });
     });
