@@ -282,15 +282,15 @@ const itinerarioService = {
               act.id AS id_actividad, act.descripcion AS descripcion_actividad,
               pa.id AS id_pais, pa.descripcion AS descripcion_pais,
               pro.id AS id_provincia, pro.descripcion AS descripcion_provincia,
-              loca.id AS id_localidad, loca.descripcion AS descripcion_localidad,
+              loca.id AS id_localidad, loca.localidad AS descripcion_localidad,
               it.email_consulta, it.telefono_consulta
         FROM public.itinerario as it 
         INNER JOIN public.entidad as ent on it.id_entidad = ent.id
         INNER JOIN public.notificacion AS noti ON noti.id_curso = it.id
         INNER JOIN public.actividad AS act ON act.id = it.id_actividad
-        INNER JOIN public.pais AS pa ON pa.id = it.id_pais
-        INNER JOIN public.provincia AS pro ON pro.id = it.id_provincia
-        INNER JOIN public.localidad AS loca ON loca.id = it.id_localidad
+        INNER JOIN dasmi.paises AS pa ON pa.id = it.id_pais
+        INNER JOIN dasmi.provincias AS pro ON pro.id = it.id_provincia
+        INNER JOIN dasmi.procedencias AS loca ON loca.id = it.id_localidad
         WHERE it.id = ${id}
 	    ;`;
 

@@ -189,7 +189,7 @@ class Notificacion {
       prov.descripcion as provincia_entidad,
       act.descripcion AS actividad_entidad,
       loca.id AS id_localidad,
-      loca.descripcion AS descripcion_localidad,
+      loca.localidad AS descripcion_localidad,
       it.email_consulta,
       it.telefono_consulta
 FROM notificacion AS noti
