@@ -86,6 +86,85 @@ const controller = {
         });
 
       break;
+
+      case 'list-page-localidades' :
+
+        let pag = req.body.pag;
+
+        con.select(`SELECT proce.id AS id_procedencia, proce.localidad AS descripcion_localidad, 
+                           provincia.id AS provincia_id, provincia.descripcion AS descripcion_provincia,
+                           pais.id AS pais_id, pais.descripcion AS descripcion_pais
+             FROM dasmi.procedencias AS proce
+             INNER JOIN dasmi.provincias as provincia ON provincia.id = proce.id_provincia
+             INNER JOIN dasmi.paises as pais ON pais.id = provincia.id_pais
+             ORDER BY descripcion_pais ASC
+             LIMIT ${pag.Take} OFFSET ${pag.Skip} ;`, 
+          ( error, result ) =>{
+            if( !error ){
+              return res.status(200).send({ 'error' : '', 'ResultSet' : result.rows });
+            }else{
+              return res.status(500).send({ 'error' : `Error al intentar obtener page localidad : ${error}` });
+            }
+        });
+
+      break;
+
+      case 'add-localidad' :
+        let sqlAdd = addNuevaLocalidad( req.body.data );
+
+        con.insert( sqlAdd, ( error, result ) =>{
+            if( !error ){
+              return res.status(200).send({ 'error' : '', 'ResultSet' : result });
+            }else{
+              return res.status(500).send({ 'error' : `Error al intentar agregar nueva localidad : ${error}` });
+            }
+        });
+
+      break;
+
+      case 'delete-localidad':
+
+        let sqlDelete = deleteLocalidad( req.body.data.id );
+
+        con.insert( sqlDelete , ( error, result ) =>{
+            if( !error ){
+              return res.status(200).send({ 'error' : '', 'ResultSet' : result });
+            }else{
+              return res.status(500).send({ 'error' : `Error al intentar eliminar localidad : ${error}` });
+            }
+        });
+
+
+      break;
+
+      case 'update-localidad':
+
+        let sqlUpdate = updateLocalidad( req.body.data );
+
+        con.insert( sqlUpdate , ( error, result ) =>{
+            if( !error ){
+              return res.status(200).send({ 'error' : '', 'ResultSet' : result });
+            }else{
+              return res.status(500).send({ 'error' : `Error al intentar actualizar localidad : ${error}` });
+            }
+        });
+
+
+      break;
+
+      case 'get-localidad-id':
+
+        let sqlGetById = getLocalidadById( req.body.data.id );
+
+        con.insert( sqlGetById , ( error, result ) =>{
+            if( !error ){
+              return res.status(200).send({ 'error' : '', 'ResultSet' : result });
+            }else{
+              return res.status(500).send({ 'error' : `Error al intentar actualizar localidad : ${error}` });
+            }
+        });
+
+      break;
     }
 
   }
@@ -164,7 +243,7 @@ const updateSqlStr = ( data ) =>{
  * @param id : String => id del registro a eliminar
  * @return sql : String => String con la consulta a enviar a la base de datos.
  */
-const deleteSqlStr = ( id ) =>{
+const deleteLocalidad = ( id ) =>{
   let sql = `DELETE FROM dasmi.provincias WHERE id = ${id} ;`;
   return sql;
 }
@@ -176,5 +255,39 @@ const listSqlList = () =>{
              ON loca.id_provincia = pro.id
              ORDER BY descr_localidad ASC 
             ;`;
+  return sql;
+}
+
+const addNuevaLocalidad = ( data ) =>{
+  let sql = `
+              INSERT INTO dasmi.procedencias ( localidad, cod_postal, id_provincia ) 
+                VALUES(
+                  '${data.localidad}',
+                  '${data.cod_postal}',
+                  ${data.id_provincia}
+                )
+            ;`;
+  return sql;
+}
+
+const updateLocalidad = ( data )=>{
+  let sql = `
+    UPDATE dasmi.procedencias SET
+      localidad = '${data.localidad}',
+      cod_postal = '${data.cod_postal}'
+  `;
+  return sql;
+}
+
+const getLocalidadById = ( id ) =>{
+  let sql = `
+    SELECT loca.id AS id, loca.localidad AS descr_localidad, pro.id AS id_provincia, pro.descripcion AS descr_provincia
+    FROM dasmi.procedencias as loca 
+    INNER JOIN dasmi.provincias as pro 
+    ON loca.id_provincia = pro.id
+    WHERE loca.id = ${id}
+    ORDER BY descr_localidad ASC 
+  `;
+
   return sql;
 }
