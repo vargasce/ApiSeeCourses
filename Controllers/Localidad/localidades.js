@@ -244,7 +244,7 @@ const updateSqlStr = ( data ) =>{
  * @return sql : String => String con la consulta a enviar a la base de datos.
  */
 const deleteLocalidad = ( id ) =>{
-  let sql = `DELETE FROM dasmi.provincias WHERE id = ${id} ;`;
+  let sql = `DELETE FROM dasmi.procedencias WHERE id = ${id} ;`;
   return sql;
 }
 
