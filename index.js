@@ -8,6 +8,8 @@ const port = props.PORT;
 const host = props.URL;
 const http = require('http');
 
+console.log( node_env );
+
 process.env.DB = props.DB;
 process.env.timeHora = props.updateFinalizadosTime.hora;
 process.env.timeMinutos = props.updateFinalizadosTime.minutos;
