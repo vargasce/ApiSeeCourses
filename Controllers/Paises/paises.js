@@ -121,7 +121,7 @@ module.exports = controller;
  */
 const listSqlstr = () =>{
   let sql = '';
-  sql = `SELECT * FROM pais ORDER BY descripcion ASC ;`;
+  sql = `SELECT * FROM dasmi.paises ORDER BY descripcion ASC ;`;
   return sql;
 }
 
@@ -133,7 +133,7 @@ const listSqlstr = () =>{
  */
 const addSqlStr = ( data ) =>{
 
-  let sql = `INSERT INTO pais (
+  let sql = `INSERT INTO dasmi.paises (
     descripcion
     )
     VALUES(
@@ -150,7 +150,7 @@ const addSqlStr = ( data ) =>{
  * @return sql : String => String con la consulta a enviar a la base de datos.
  */
 const updateSqlStr = ( data ) =>{
-  let sql = `UPDATE pais SET descripcion = '${data.data.descripcion}' WHERE id = ${data.id} ;`;
+  let sql = `UPDATE dasmi.paises SET descripcion = '${data.data.descripcion}' WHERE id = ${data.id} ;`;
   return sql;
 }
 
@@ -161,7 +161,7 @@ const updateSqlStr = ( data ) =>{
  * @return sql : String => String con la consulta a enviar a la base de datos.
  */
 const deleteSqlStr = ( id ) =>{
-  let sql = `DELETE FROM pais WHERE id = ${id} ;`;
+  let sql = `DELETE FROM dasmi.paises WHERE id = ${id} ;`;
   return sql;
 }
 
@@ -172,6 +172,6 @@ const deleteSqlStr = ( id ) =>{
  * @return sql : String => String con la consulta a enviar a la base de datos.
  */
 const getSqlStringByIb = ( id ) =>{
-  let sql = `SELECT * FROM pais WHERE id = ${id} ;`;
+  let sql = `SELECT * FROM dasmi.paises WHERE id = ${id} ;`;
   return sql;
 }

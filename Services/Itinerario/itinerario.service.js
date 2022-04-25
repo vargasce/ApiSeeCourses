@@ -145,6 +145,7 @@ const itinerarioService = {
 
       let objItinerario = new itinerarioModel( data );
       let sql = objItinerario.getSqlString();
+
       try{
 
         await con.QueryAwait('BEGIN');
@@ -178,7 +179,7 @@ const itinerarioService = {
 
       let objItinerario = new itinerarioModel( data );
       let sql = objItinerario.getSqlStringUpdate();
-
+      
       con.insert( sql, ( error, insert ) =>{
         if( !error ){
           resolve( insert );

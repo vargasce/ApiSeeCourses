@@ -195,9 +195,9 @@ class Notificacion {
 FROM notificacion AS noti
 FULL OUTER JOIN itinerario AS it ON noti.id_curso = it.id
 INNER JOIN entidad AS enti ON enti.id = noti.id_entidad
-INNER JOIN pais AS pas ON pas.id = it.id_pais
-INNER JOIN provincia AS prov ON prov.id = it.id_provincia
-INNER JOIN localidad AS loca ON loca.id = it.id_localidad
+INNER JOIN dasmi.paises AS pas ON pas.id = it.id_pais
+INNER JOIN dasmi.provincias AS prov ON prov.id = it.id_provincia
+INNER JOIN dasmi.procedencias AS loca ON loca.id = it.id_localidad
 INNER JOIN actividad AS act ON act.id = it.id_actividad
 WHERE enti.verificado = true AND noti.pendiente = true and noti.es_admin = true
 AND noti.es_curso = true
@@ -232,8 +232,8 @@ ORDER BY noti.id DESC
       prov.descripcion AS descripcion_provincia
           FROM notificacion AS noti
           INNER JOIN entidad AS enti ON enti.id = noti.id_entidad
-      INNER JOIN pais AS pas ON pas.id = enti.id_pais
-          INNER JOIN provincia AS prov ON prov.id = enti.id_provincia
+      INNER JOIN dasmi.paises AS pas ON pas.id = enti.id_pais
+          INNER JOIN dasmi.provincias AS prov ON prov.id = enti.id_provincia
       WHERE enti.verificado = false AND noti.pendiente = true AND noti.es_admin = true AND noti.es_curso = false
           ORDER BY noti.id DESC;`;
     }

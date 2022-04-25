@@ -12,9 +12,9 @@ const data_conf = {
 	password: props.DB.PASS,
 	database: props.DB.DATA_BASE,
 	port: props.DB.PORT,
-	ssl: {
-    	rejectUnauthorized: false
-  	}
+	//ssl: {
+   	// 	rejectUnauthorized: false
+  	//}
 };
 
 /** CLOUSTER **/

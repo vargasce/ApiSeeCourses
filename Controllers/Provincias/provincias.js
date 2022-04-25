@@ -100,7 +100,7 @@ const controller = {
       
         let id_get = req.body.data.id;
 
-        con.select(`SELECT * FROM provincia WHERE id = ${id_get} ;`, ( error, result ) =>{
+        con.select(`SELECT * FROM dasmi.provincias WHERE id = ${id_get} ;`, ( error, result ) =>{
           if( !error ){
             return res.status(200).send({ 'error' : '', 'ResultSet' : result.rows });
           }else{
@@ -126,8 +126,8 @@ module.exports = controller;
  */
 const listSqlstrById = ( id_pais  ) =>{
   let sql = `SELECT prov.id AS id, prov.descripcion AS descr_provincia, pa.id AS id_pais, pa.descripcion AS descr_pais
-             FROM provincia as prov 
-             INNER JOIN pais as pa ON prov.id_pais = pa.id
+             FROM dasmi.provincias as prov 
+             INNER JOIN dasmi.paises as pa ON prov.id_pais = pa.id
              WHERE prov.id_pais = ${id_pais} ;`;
 
     return sql;
@@ -141,7 +141,7 @@ const listSqlstrById = ( id_pais  ) =>{
  */
 const addSqlStr = ( data ) =>{
 
-  let sql = `INSERT INTO provincia (
+  let sql = `INSERT INTO dasmi.provincias (
     descripcion,
     id_pais
     )
@@ -160,7 +160,7 @@ const addSqlStr = ( data ) =>{
  * @return sql : String => String con la consulta a enviar a la base de datos.
  */
 const updateSqlStr = ( data ) =>{
-  let sql = `UPDATE provincia SET id_pais = ${data.id_pais} , descripcion = '${data.descripcion}' WHERE id = ${data.id} ;`;
+  let sql = `UPDATE dasmi.provincias SET id_pais = ${data.id_pais} , descripcion = '${data.descripcion}' WHERE id = ${data.id} ;`;
   return sql;
 }
 
@@ -171,14 +171,14 @@ const updateSqlStr = ( data ) =>{
  * @return sql : String => String con la consulta a enviar a la base de datos.
  */
 const deleteSqlStr = ( id ) =>{
-  let sql = `DELETE FROM provincia WHERE id = ${id} ;`;
+  let sql = `DELETE FROM dasmi.provincias WHERE id = ${id} ;`;
   return sql;
 }
 
 const listSqlList = () =>{
   let sql = `SELECT prov.id AS id, prov.descripcion AS descr_provincia, pa.id AS id_pais, pa.descripcion AS descr_pais
-             FROM provincia as prov 
-             INNER JOIN pais as pa 
+             FROM dasmi.provincias as prov 
+             INNER JOIN dasmi.paises as pa 
              ON prov.id_pais = pa.id
              ORDER BY descr_pais ASC 
             ;`;
