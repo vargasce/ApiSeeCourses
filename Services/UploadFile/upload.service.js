@@ -98,6 +98,9 @@ const uploadService = {
           let result = await con.QueryAwait( sql );
           let ok = await con.QueryAwait('COMMIT');
           if( ok ) {
+
+            console.log( obj.filePath );
+
             saveFile( obj.fileName, obj.filePath, id, table );
             resolve( result.rows );
           }
