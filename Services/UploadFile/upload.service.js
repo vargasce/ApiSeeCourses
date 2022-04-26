@@ -120,7 +120,7 @@ const uploadService = {
         if( exits ){
           resolve( path.resolve(file_path) );
         }else{
-          reject({ 'error' : true });
+          resolve( path.resolve(`./File_up/ImageNotAvailable.png`) );
         }
       });
     });
