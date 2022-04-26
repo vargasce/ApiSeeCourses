@@ -99,8 +99,6 @@ const uploadService = {
           let ok = await con.QueryAwait('COMMIT');
           if( ok ) {
 
-            console.log( obj.filePath );
-
             saveFile( obj.fileName, obj.filePath, id, table );
             resolve( result.rows );
           }
@@ -124,7 +122,8 @@ const uploadService = {
         if( exits ){
           resolve( path.resolve(file_path) );
         }else{
-          resolve( path.resolve(`./File_up/ImageNotAvailable.png`) );
+          reject(`Error, file not found -> ${file}`)
+          //resolve( path.resolve(`./File_up/ImageNotAvailable.png`) );
         }
       });
     });
@@ -206,7 +205,8 @@ const saveFile = ( fileName, filePath, id, tabla ) =>{
   try{
     let fecha = dt.getDateCurrentStringCustom();
     const is = fs.createReadStream( filePath );
-    const os = fs.createWriteStream( `./File_up/_${tabla}_${id}_${fecha}_${fileName}` );
+    let fileAuxPath = path.resolve(`./File_up`);
+    const os = fs.createWriteStream( `${fileAuxPath}/_${tabla}_${id}_${fecha}_${fileName}` );
 
     is.pipe( os );
 
