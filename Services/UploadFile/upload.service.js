@@ -61,7 +61,8 @@ const uploadService = {
         if( exits ){
           resolve( path.resolve( image_path ) );
         }else{
-          reject( `Imagen no econtrada: ${exits}`);
+          resolve( path.resolve(`./File_up/ImageNotAvailable.png`) );
+          //reject( `Imagen no econtrada: ${exits}`);
         }
       });
     });
