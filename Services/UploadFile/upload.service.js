@@ -206,6 +206,7 @@ const saveFile = ( fileName, filePath, id, tabla ) =>{
     let fecha = dt.getDateCurrentStringCustom();
     const is = fs.createReadStream( filePath );
     let fileAuxPath = path.resolve(`./File_up`);
+    console.log(fileAuxPath);
     const os = fs.createWriteStream( `${fileAuxPath}/_${tabla}_${id}_${fecha}_${fileName}` );
 
     is.pipe( os );
