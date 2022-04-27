@@ -210,11 +210,13 @@ module.exports = controller;
  * @param paginador : Object => Objecto con la paginacion actual.
  * @return sql : String => String con la consulta a enviar a la base de datos.
  */
-const listSqlstrById = (id_provincia) => {
-  let sql = `SELECT loca.id AS id, loca.localidad AS descr_localidad, pro.id AS id_provincia, pro.descripcion AS descr_provincia
+const listSqlstrById = (id) => {
+  let sql = `SELECT loca.id AS id, loca.localidad AS descr_localidad, pro.id AS id_provincia, pro.descripcion AS descr_provincia,
+                    pais.id AS id_pais, pais.descripcion AS pais_descripcion
              FROM dasmi.procedencias as loca
              INNER JOIN dasmi.provincias as pro ON pro.id = loca.id_provincia
-             WHERE loca.id_provincia = ${id_provincia}
+             INNER JOIN dasmi.paises AS pais ON pais.id = pro.id_pais
+             WHERE loca.id = ${id}
              ORDER BY descr_localidad ASC ;`;
 
   return sql;
@@ -306,12 +308,12 @@ const updateLocalidad = (data) => {
 
 const getLocalidadById = (id) => {
   let sql = `
-    SELECT loca.id AS id, loca.localidad AS descr_localidad, pro.id AS id_provincia, pro.descripcion AS descr_provincia
+    SELECT loca.id AS id, loca.localidad AS localidad_descripcion, pro.id AS id_provincia, pro.descripcion AS provincia_descripcion,
+           pais.id AS id_pais, pais.descripcion AS pais_descripcion
     FROM dasmi.procedencias as loca 
-    INNER JOIN dasmi.provincias as pro 
-    ON loca.id_provincia = pro.id
+    INNER JOIN dasmi.provincias as pro ON loca.id_provincia = pro.id
+    INNER JOIN dasmi.paises AS pais ON pais.id = pro.id_pais
     WHERE loca.id = ${id}
-    ORDER BY descr_localidad ASC 
   `;
 
   return sql;
