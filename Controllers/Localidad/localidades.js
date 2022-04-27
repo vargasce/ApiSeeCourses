@@ -120,7 +120,7 @@ const controller = {
                 if (!error) {
                     con.select( `SELECT count(id) FROM dasmi.procedencias;`, (errorCount, count) => {
                         if (!errorCount) {
-                            return res.status(200).send({ error: "", ResultSet: { rows: result.rows, count: count.rows[0] } });
+                            return res.status(200).send({ error: "", ResultSet: { rows: result.rows, count: count.rows[0].count } });
                         } else {
                             return res.status(500).send({ error: `Error al intentar obtener page localidad : ${error}` });
                         }
