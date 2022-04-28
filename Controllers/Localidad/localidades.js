@@ -302,6 +302,7 @@ const updateLocalidad = (data) => {
     UPDATE dasmi.procedencias SET
       localidad = '${data.localidad}',
       cod_postal = '${data.cod_postal}'
+      WHERE id = ${data.id}
   `;
   return sql;
 };
