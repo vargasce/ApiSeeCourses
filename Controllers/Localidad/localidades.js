@@ -294,6 +294,7 @@ const addNuevaLocalidad = (data) => {
                   ${data.id_provincia}
                 )
             ;`;
+          console.log(sql);
   return sql;
 };
 
