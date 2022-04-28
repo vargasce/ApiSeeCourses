@@ -305,6 +305,7 @@ const updateLocalidad = (data) => {
       cod_postal = '${data.cod_postal}'
       WHERE id = ${data.id}
   `;
+  console.log( sql );
   return sql;
 };
 
