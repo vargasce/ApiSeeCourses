@@ -11,11 +11,14 @@ const data_conf = {
 	user: props.DB.USER,
 	password: props.DB.PASS,
 	database: props.DB.DATA_BASE,
-	port: props.DB.PORT,
-	ssl: {
-   		rejectUnauthorized: false
-  	}
+	port: props.DB.PORT 
 };
+
+if( node_env == "production"){
+	data_conf.ssl = {
+		rejectUnauthorized: false
+	}
+}
 
 /** CLOUSTER **/
 const conectionDB = ( function () {
