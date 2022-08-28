@@ -33,7 +33,7 @@ const selectQuery = ( sql, resultset ) =>{
  * @Observation : Realizar select en tabla.
  * @example
  * params 1 => QueryAwait( 'INSERT INTO table ( id, name ) VALUES( 1, 'Cristian')' );
- * params 2 => QueryAwait( 'INSERT INTO table ( id, name ) VALUES($1,$2)', [ 1, 'Cristian' ] );
+ * params 2 => QueryAwait( 'INSERT INTO table ( $1, $2 ) VALUES([1,'cristian'])' );
  * @param { string } sql => consulta en formato sql para enviar.
  * @param { Array } valuesArray => Valores de la consulta, [id,'name','last_name', ...]. format sql  ( INERT INTO table (id, name) 	VALUES($1,$2) RETURNING * ; )
  * @returns resultset : Promise => ( async ).
@@ -109,18 +109,18 @@ const QueryAwaitById = async ( id, table, columnFilter, column = null ) =>{
  * @example 
  * 		'id'
  * 
- * @param { string } sentido => Si el orden es Ascendente o  Desendente, ( DEFAULT ASC )
+ * @param { string } orderBy => Si el orden es Ascendente o  Desendente, ( DEFAULT ASC )
  * @example
  * 		ASC or DESC
  * 
  * @returns resultset : Promise => ( async )
  */
-const QueryAwaitPag = async ( table, skip = 0, take = 10, sortBy = 'id', sentido = 'ASC' ) =>{
+const QueryAwaitPag = async ( table, skip = 0, take = 10, sortBy = 'id', orderBy = 'ASC' ) =>{
 	return new Promise( async ( resolve, reject ) => {
 		
 		if( arguments.length == 5 ){
 			let sql = `
-				SELECT * FROM ${table} LIMIT ${skip} OFFSET ${take} ORDER BY ${sortBy} ${sentido} ;
+				SELECT * FROM ${table} LIMIT ${skip} OFFSET ${take} ORDER BY ${sortBy} ${orderBy} ;
 			`;
 
 			try{
@@ -180,7 +180,6 @@ const updateQuery = ( sql, resultset ) =>{
 		}
 	});
 }
-
 
 
 /** DELETE QUERY
